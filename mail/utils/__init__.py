@@ -17,7 +17,6 @@ import bcrypt
 import frappe
 from bs4 import BeautifulSoup
 from frappe import _
-from frappe.types.filter import FilterTuple
 from frappe.utils import get_bench_path
 from frappe.utils.caching import redis_cache
 
@@ -265,6 +264,7 @@ def parse_filters(filters: list | None) -> dict:
 	result = {}
 	for f in filters:
 		if isinstance(f, list):
+			FilterTuple = tuple[str, ...]
 			f = FilterTuple(f)
 
 		if f.operator == "=":
